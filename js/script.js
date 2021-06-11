@@ -7,15 +7,13 @@ project 1 - A Random Quote Generator
   // Check the "Project Resources" section of the project instructions
   // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
 
-/*** 
- * `quotes` array 
-***/
+//Quotes array containing a quote and source. Citation year and tag aren't always needed/provided. 
 let quotes = [{
 	quote: "I got mind control over Debo. When he here, I be quiet, but when he leave, I be talkin' again.",
 	source: "Smokey",
 	citation: "Friday",
 	year: 1995,
-	tags: ["movie quotes", "humor"]
+	tags: ["movie quotes"]
 }, {
 	quote: "Hello boys! I'm baaack!",
 	source: "Russell Casse",
@@ -34,15 +32,14 @@ let quotes = [{
 }];
 
 
-/***
- * `getRandomQuote` function
-***/
+//Random Quote Function. Generated random number is used to select a quote from the quotes array.
 function getRandomQuote() {
 	let randomNumber = Math.floor(Math.random() * quotes.length);
 	let selectedQuote = quotes[randomNumber];
 	return selectedQuote;
 };
 
+//Background color function. Generates three random numbers to build a rgb color value. Once generated, the color is used to change the background color of the HTML body.
 function changeBackground() {
   let value1 = Math.floor(Math.random() * 256)+1;
   let value2 = Math.floor(Math.random() * 256)+1;
@@ -50,12 +47,11 @@ function changeBackground() {
   document.body.style.background = `rgb(${value1},${value2},${value3}) `;
 }
 
+//Refreshes the printQuote function every 5 seconds
 setInterval(printQuote, 5000);
 
-/***
- * `printQuote` function
-***/
-
+/*printQuote uses the changeBackground color function to change background color. 
+It also pulls the applicable quote, citation, year, and tags and compiles them in to a string named 'html'*/
 function printQuote() {
   changeBackground();
 	let selectedQuote = getRandomQuote();
@@ -73,6 +69,12 @@ function printQuote() {
 	} else {
 		html += `
     <span class="year">${selectedQuote.year}</span>`
+	};
+  if (!selectedQuote.tags) {
+		html = html;
+	} else {
+		html += `
+    <span class="year">${selectedQuote.tags}</span>`
 	};
 	html += `
 </p>`;
